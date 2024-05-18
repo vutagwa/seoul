@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-function RewardsApp() {
+function Bottle() {
   const [collectedBottles, setCollectedBottles] = useState(0);
   const [rewardsPoints, setRewardsPoints] = useState(0);
 
@@ -18,21 +19,37 @@ function RewardsApp() {
     }
   };
 
+  // Coordinates of the nearest station (example)
+  const nearestStationCoords = { lat: 40.7128, lng: -74.0060 };
+
   return (
     <div className="container mt-5">
-      <div className="card text-center">
-        <div className="card-header">
-          <h1>Rewards for Recycling</h1>
+      <div className="d-flex flex-row">
+        <div className="card text-center bottle-card mr-3">
+          <div className="card-header">
+            <h1 className="card-title">Rewards for Recycling</h1>
+          </div>
+          <div className="card-body">
+            <p className="card-text">Collected Bottles: {collectedBottles}</p>
+            <p className="card-text">Rewards Points: {rewardsPoints}</p>
+            <button className="btn btn-primary mr-3" onClick={collectBottle}>Collect Bottle</button>
+            <button className="btn btn-success" onClick={redeemPoints}>Redeem Points</button>
+          </div>
         </div>
-        <div className="card-body">
-          <p className="card-text">Collected Bottles: {collectedBottles}</p>
-          <p className="card-text">Rewards Points: {rewardsPoints}</p>
-          <button className="btn btn-primary mr-3" onClick={collectBottle}>Collect Bottle</button>
-          <button className="btn btn-success" onClick={redeemPoints}>Redeem Points</button>
+        <div className="map-container">
+          <LoadScript googleMapsApiKey="YOUR_API_KEY">
+            <GoogleMap
+              mapContainerStyle={{ height: '400px', width: '600px' }}
+              center={nearestStationCoords}
+              zoom={14}
+            >
+              <Marker position={nearestStationCoords} />
+            </GoogleMap>
+          </LoadScript>
         </div>
       </div>
     </div>
   );
 }
 
-export default RewardsApp;
+export default Bottle;

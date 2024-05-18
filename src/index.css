@@ -73,3 +73,19 @@
 .register-container button:hover {
   background-color: #0056b3;
 }
+.bottle-card {
+max-width: 300px;
+border: 1px solid rgb(179, 173, 173);
+border-radius: 25px;
+align-items: center;
+padding: 10px 20px;
+}
+
+.map-container {
+  margin-top: 20px;
+  border: 2px solid #a09c9c; /* Red */
+  border-radius: 1px solid;
+  overflow: hidden;
+  max-width: 500px;
+  height: 300px;
+}
