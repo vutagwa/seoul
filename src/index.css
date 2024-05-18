@@ -90,23 +90,107 @@ padding: 10px 20px;
   height: 300px;
 }
 .App {
-  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 .header {
-  background-color: #00af54;
-  color: #fff;
+  background-color: #4CAF50;
+  color: white;
   padding: 20px;
+}
+
+.header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 18px;
+}
+
+.features-section {
+  padding: 50px 0;
 }
 
 .feature {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.feature img {
+  width: 100px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  margin-top: -30px;
+}
+
+.feature h3 {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.feature p {
+  font-size: 18px;
+}
+
+.how-it-works-section {
+  background-color: #f8f8f8;
+  padding: 50px 0;
+}
+
+.how-it-works-section h2 {
   margin-bottom: 20px;
 }
 
-.footer {
-  background-color: #00af54;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
+
+
+.contact-section {
+  background-color: #4CAF50;
+  color: white;
+  padding: 50px 0;
 }
+
+.contact-section h2 {
+  margin-bottom: 20px;
+}
+
+.contact-section form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.contact-section input[type='text'],
+.contact-section input[type='email'],
+.contact-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  color: #333; 
+}
+
+.contact-section textarea {
+  height: 150px; 
+}
+
+.contact-section button[type='submit'] {
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-section button[type='submit']:hover {
+  background-color: #e0e0e0; /* Light gray background color on hover */
+}
+
+
 

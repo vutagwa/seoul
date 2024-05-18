@@ -1,11 +1,10 @@
 import React from 'react';
 
-
 function Land() {
   return (
     <div className="App">
       <header className="header">
-        <h1>Recycle Now</h1>
+        <h1>R-Gamers</h1>
         <p>An eco-friendly solution for waste management</p>
       </header>
 
@@ -51,7 +50,7 @@ function Land() {
       </main>
 
       <footer className="footer">
-        <p>&copy; 2024 Recycle Now</p>
+        <p>&copy; 2024 faith and marion</p>
       </footer>
     </div>
   );
