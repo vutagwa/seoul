@@ -1,4 +1,4 @@
-# Seoul
+# R-Gamers
 
 Rewards for Recycling is a simple React application that incentivizes users to recycle plastic bottles by rewarding them with points for each bottle collected. Users can later redeem these points for reward
 ## Features
