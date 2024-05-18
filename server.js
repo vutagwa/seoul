@@ -1,28 +1,29 @@
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import cors from 'cors';
+const express = require('express');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-app.use(cors());
 
 // Secret key for JWT token signing (replace with your own secret)
 const JWT_SECRET = 'your-secret-key';
 
 // Dummy user data (replace with your database)
-let users = [
+const users = [
   { id: 1, username: 'user1', password: 'password1', collectedBottles: 0, rewardsPoints: 0 },
   { id: 2, username: 'user2', password: 'password2', collectedBottles: 0, rewardsPoints: 0 }
 ];
 
 // Authentication middleware
 const authenticateUser = (req, res, next) => {
+  // Get the JWT token from the request headers
   const token = req.headers.authorization?.split(' ')[1];
+
   if (token) {
     try {
+      // Verify the token
       const decoded = jwt.verify(token, JWT_SECRET);
       req.user = decoded.user;
       next();
@@ -34,12 +35,15 @@ const authenticateUser = (req, res, next) => {
   }
 };
 
-// Backend API Endpoints
 // Login endpoint
-app.post('/api/login', (req, res) => {
+app.post('/login', (req, res) => {
   const { username, password } = req.body;
+
+  // Check if the username and password match a user in the database
   const user = users.find(u => u.username === username && u.password === password);
+
   if (user) {
+    // Generate a JWT token
     const token = jwt.sign({ user: { id: user.id, username: user.username } }, JWT_SECRET);
     res.json({ token });
   } else {
@@ -47,23 +51,14 @@ app.post('/api/login', (req, res) => {
   }
 });
 
-// Registration endpoint
-app.post('/api/register', (req, res) => {
-  const { username, password } = req.body;
-  const existingUser = users.find(u => u.username === username);
-  if (existingUser) {
-    return res.status(400).json({ message: 'Username already exists' });
+// Protected endpoint to fetch user data
+app.get('/api/user', authenticateUser, (req, res) => {
+  const user = users.find(u => u.id === req.user.id);
+  if (user) {
+    res.json({ user });
+  } else {
+    res.status(404).json({ message: 'User not found' });
   }
-  const newUser = {
-    id: users.length + 1,
-    username,
-    password,
-    collectedBottles: 0,
-    rewardsPoints: 0
-  };
-  users.push(newUser);
-  const token = jwt.sign({ user: { id: newUser.id, username: newUser.username } }, JWT_SECRET);
-  res.json({ token });
 });
 
 // Protected endpoint to collect a bottle
@@ -88,7 +83,6 @@ app.post('/api/redeemPoints', authenticateUser, (req, res) => {
     res.status(400).json({ message: 'Insufficient points' });
   }
 });
-
 
 // Start the server
 app.listen(PORT, () => {
